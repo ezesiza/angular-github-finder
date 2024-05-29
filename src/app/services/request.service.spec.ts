@@ -47,7 +47,7 @@ describe('RequestService', () => {
   });
 
   it('should call getCurrentUser', () => {
-    const token = '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'
+    
     landingComponent.getCurrentUser();
   });
 });
