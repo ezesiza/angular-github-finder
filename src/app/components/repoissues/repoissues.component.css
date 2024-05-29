@@ -1,0 +1,11 @@
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+    /* width: 85%; */
+    height: 10px;
+}
+
+table th,
+table td {
+    overflow: clip;
+}

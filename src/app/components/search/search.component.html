@@ -1,0 +1,55 @@
+<div class="container search-container">
+  <form class="needs-validation" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-auto">
+        <div class="search-heading">
+          <h5 class="text-right">Search for public
+            repositories</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+        <button type="button" class="btn btn-outline-info" (click)="backToHome()">Back to Repositories
+        </button>
+      <div class="col-sm-8">
+        <div class="input-group input-group-md">
+          <input type="text" class="form-control" value="#inputvalue" [formControl]="inputValue" [(ngModel)]="currentSearch"
+            (keyup)="applyFilter($event)" placeholder=".... Search repos" aria-label=".... Search repos" autofocus
+            name="search">
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-sm btn-outline-info" (click)="onSearchSubmit()">Start
+          Searching</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container table-container" *ngIf="repoListLoading">
+  
+  <h4>Repository Count: {{repositoryList.length}}</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Owner</th>
+        <th scope="col">Id</th>
+        <th scope="col">Node Id</th>
+        <th scope="col">Type</th>
+        <th scope="col">Url</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- *ngFor="let item of repositoryList "> -->
+      <tr *ngFor="let item of repositoryList | slice : (pagination.currentPage - 1) * pagination.pageSize : pagination.currentPage * pagination.pageSize">
+        <td>{{item.login}}</td>
+        <td>{{item.id}}</td>
+        <td>{{item.node_id}}</td>
+        <td>{{item.type }}</td>
+        <td> <a (click)="getUserDetails(item.url)" routerLink="/user-details/username">{{item.url}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination #pagination (newPage)="getNextBatch()" [collectionSize]="repositoryList.length" [pageSize]="25"
+    [firstLastButtons]="true" [maxSize]="2"></pagination>
+</div>

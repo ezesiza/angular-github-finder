@@ -1,0 +1,32 @@
+<div class="container text-center"*ngIf="!repoIssuesListLoading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">...Loading Repositories Issues</span>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="hasError">
+    <p>{{repoIssueError}}</p>
+  </div>
+<div class="container-fluid" *ngIf="repoIssuesListLoading">
+    <table class="table table-responsive-sm">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Url</th>
+            <th scope="col">Title</th>
+            <th scope="col">Created At</th>
+            <th scope="col-sm-1">Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of repoIssuesList | slice : (pagination.currentPage - 1) * pagination.pageSize : pagination.currentPage * pagination.pageSize">
+            <td>{{item.number}}</td>
+            <td><a (click)="getUserDetails(item.url)" routerLink="/user-details" >{{item.url}} </a></td>
+            <td>{{item.title}}</td>
+            <td>{{item.created_at | date:'medium'}}</td>
+            <td ><textarea [innerHTML]="item.body" [readonly]="true"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination #pagination  [collectionSize]="repoIssuesList.length" [pageSize]="25" [firstLastButtons]="true" [maxSize]="2"></pagination>
+</div>

@@ -1,0 +1,27 @@
+<div class="container text-center" *ngIf="!repoDetailsLoading">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">...Loading Repositories Details</span>
+  </div>
+</div>
+<div class="container" *ngIf="hasError">
+  <p>{{repoDetailsError}}</p>
+</div>
+
+<div class="container" *ngIf="repoDetailsLoading">
+    <div class="btn-container">
+      <button type="button" class="btn btn-outline-info" (click)="backToHome()">Back to Repo List
+      </button>
+      <button type="button" class="btn btn-outline-info" (click)="backToPrevious()">Back to Previous page
+      </button>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">Name: {{repoDetails.name}}</li>
+    <li class="list-group-item">Description: {{repoDetails.description}}</li>
+    <li class="list-group-item" (click)="getUserDetails(repoDetails.url)">Url:<a routerLink="/user-details">
+        {{repoDetails.url}} </a></li>
+    <li class="list-group-item">Issues Url: {{detailsUrl+'/issues'}}</li>
+    <li class="list-group-item">Open Issues Count: {{repoDetails.open_issues_count}}</li>
+    <li class="list-group-item">Open Issues Count: {{repoDetails.language}}</li>
+  </ul>
+  <repo-issues [username]="username" [reponame]="reponame"></repo-issues>
+</div>

@@ -1,0 +1,8 @@
+.container {
+    max-width: 720px;
+    margin-top: 50px;
+}
+
+.is-invalid {
+    color: red;
+}

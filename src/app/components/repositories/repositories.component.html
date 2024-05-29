@@ -1,0 +1,45 @@
+<div class="container text-center" *ngIf="!repoListLoading && !hasError">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">...Loading Repositories List</span>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="hasError">
+    <card-selector [cardTitle]="errors!.message" [cardsubTitle]="errors!.extensions.code"
+      [cardContent]="errors!.path[0]"></card-selector>
+  </div>
+</div>
+
+<div class="container" *ngIf="repoListLoading">
+    <div class="btn-container">
+      <button type="button" class="btn btn-outline-info" (click)="backToHome()"><<<< Back to Home
+      </button>
+      <button type="button" class="btn btn-outline-info" (click)="searchUsers()">Search Users
+      </button>
+    </div>
+  <h4>Repository Count: {{repositoryList.length}}</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Owner</th>
+        <th scope="col">Name</th>
+        <th scope="col">Stargazer Count</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Url</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of repositoryList | slice : (pagination.currentPage - 1) * pagination.pageSize : pagination.currentPage * pagination.pageSize">
+        <td>{{item.owner.login}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.stargazers_count}}</td>
+        <td>{{item.created_at | date:'medium'}}</td>
+        <td><a (click)="getIssuesRepo(item.url)" [routerLink]="'repositories/reponame'">{{item.url}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination #pagination (newPage)="getNextBatch($event)" [collectionSize]="repositoryList.length" [pageSize]="25"
+    [firstLastButtons]="true" [maxSize]="2"></pagination>
+</div>

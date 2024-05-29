@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="btn-container">
+    <button type="button" class="btn btn-outline-info" (click)="backToHome()">Back to Search
+    </button>
+    <button type="button" class="btn btn-outline-info" (click)="backToPrevious()">Back to Previous page
+    </button>
+  </div>
+    <div class="row">
+        <div class="column">
+            <div class="col-md-4">
+                <img src={{userDetails.avatar_url}} class="card-img" alt={{userDetails.avatar_url}}>
+                <div class="card-header">
+                  {{userDetails.full_name}}
+                </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="">
+              <ul class="no-bullets">
+                  <li class="card-title">{{userDetails.name}}</li>
+                  <li class="card-text">{{userDetails.bio}}</li>
+                  <li class="card-text">{{userDetails.company}}</li>
+                  <li class="card-text">{{userDetails.location}}</li>
+                  <li class="card-text">{{userDetails.login}}</li>
+                  <li><a target="_blank" href={{userDetails.html_url}} >{{userDetails.html_url}}</a></li>
+              </ul>
+          </div>
+          </div>
+    </div>
+    <div class="table-container" *ngIf="userDetailsLoading">
+  
+        <h4>Repository Count: {{userRepos.length}}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+                <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Language</th>
+              <th scope="col">Topics</th>
+              <th scope="col">Html Url</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let repo of userRepos | slice : (pagination.currentPage - 1) * pagination.pageSize : pagination.currentPage * pagination.pageSize">
+              <td>{{repo.id}}</td>
+              <td>{{repo.name}}</td>
+              <td>{{repo.description}}</td>
+              <td>{{repo.language }}</td>
+              <td>{{repo.topics.toString()}}</td>
+              <td> <a (click)="navigageUserDetails(repo.html_url)" routerLink="repositories/:username/:reponame">{{repo.html_url}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination #pagination (newPage)="getNextBatch($event)" [collectionSize]="userRepos.length" [pageSize]="25"
+          [firstLastButtons]="true" [maxSize]="2"></pagination>
+      </div>
+</div>

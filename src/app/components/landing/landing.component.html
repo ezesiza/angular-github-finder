@@ -1,0 +1,70 @@
+<div *ngIf="router.url === '/'" class="container search-container">
+    <form class="needs-validation" novalidate>
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="search-heading">
+                    <h5 class="text-right">Enter your API token to start browsing issues of public
+                        repositories</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <div class="input-group input-group-md">
+                    <!-- <label for="token" class="form-label"></label> -->
+                    <input type="text" required class="form-control is-invalid"
+                        placeholder=".... API Token:" aria-label=".... API Token:" autofocus name="token"
+                        [formControl]="inputValue">
+                        <!-- [(ngModel)]="inputValue"> -->
+                    <div [ngClass]="{'invalid-feedback': !!hasUser}" class="is-invalid" [innerHTML]="validationError">
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-sm btn-outline-info" (click)="onTokenSubmit()">Start
+                    Browsing</button>
+            </div>
+        </div>
+    </form>
+    <div class="py-5">
+      <div class="container">
+        <div class="row hidden-md-up">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-block">
+                <h4 class="card-title">Search Users</h4>
+                <h6 class="card-subtitle text-muted">Repository of all users</h6>
+                <p class="card-text p-y-1">Search for users using login name</p>
+                <a routerLink="/search" class="card-link">Users</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-block">
+                <h4 class="card-title">Repositories</h4>
+                <h6 class="card-subtitle text-muted">List of all Github Repositories</h6>
+                <p class="card-text p-y-1">All Repos and Issues</p>
+                <a routerLink="/repositories">Repos</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-block">
+                <h4 class="card-title">Repositories</h4>
+                <h6 class="card-subtitle text-muted">List of all Github Repositories</h6>
+                <p class="card-text p-y-1">All Repos and Issues</p>
+                <a routerLink="/repositories">Repos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+

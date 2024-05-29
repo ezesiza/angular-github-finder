@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.container{
+    margin-top: 7rem;
+}
+.btn-container{
+    margin: 0 auto;
+    .btn {
+        position: fixed;
+        margin: 10px;
+        margin-top: -10rem;
+        position: relative;
+        display: inline;
+        left: -8rem;
+    }
+}
