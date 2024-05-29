@@ -1,4 +1,4 @@
-# GithubFinderAngular
+# Github Finder Angular
 > This project built in Angular implements a graphql client. It uses the repository at https://github.com/ezesiza/github-graphql-server as a graphql server to fetch from the github rest api.
 
 ## Development server
